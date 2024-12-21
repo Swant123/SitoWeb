@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swant-Shop - Benvenuto</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('s1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.3s ease, transform 0.2s ease;
+            opacity: 0; /* Button hidden initially */
+            transition: opacity 1s ease-in-out;
+        }
+        .btn:hover {
+            background: #e0554a;
+            transform: scale(1.2s);
+        }
+    </style>
+</head>
+<body>
+    <h1>Benvenuti su Swant-Shop</h1>
+    <p>Il tuo negozio di abbigliamento preferito è a un clic di distanza!</p>
+    <a href="primo.html" class="btn" id="enter-button">Entra nel negozio</a>
+
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById("enter-button").style.opacity = 1; // Mostra il bottone dopo il ritardo
+            }, 2000); // Il bottone appare dopo 2 secondi
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negozio di Abbigliamento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('stelle.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #222;
+            color: #fff;
+            padding: 1rem 2rem;
+        }
+
+        header .logo h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff6f61;
+        }
+
+        section {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        section p {
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8rem;
+    padding: 2rem 0;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+
+        .product-card {
+            background: #fff;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .product-card button {
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .product-card button:hover {
+            background: #e0554a;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #222;
+            color: #fff;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: #ff6f61;
+            text-decoration: underline;
+        }
+
+        #success-message {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            font-size: 1.1rem;
+            z-index: 1000;
+        }
+
+        select {
+            margin-top: 10px;
+            padding: 5px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <script>
+        const cart = [];
+
+        function addToCart(name, price, image, productId) {
+            const size = document.getElementById('size-select-' + productId).value;
+            if (!size) {
+                alert("Per favore, scegli una taglia.");
+                return;
+            }
+
+            const existingItem = cart.find(item => item.name === name && item.size === size);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1, size, image });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showSuccessMessage();
+        }
+
+        function showSuccessMessage() {
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Swant-Shop</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#prodotti">Prodotti</a></li>
+                <li><a href="carrello.html">Carrello</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="success-message">Aggiunto al carrello con successo!</div>
+
+    <section id="home">
+        <h2>Benvenuti su Swant-Shop</h2>
+        <p>Scopri la nostra collezione esclusiva di abbigliamento per ogni occasione.</p>
+    </section>
+
+    <section id="prodotti">
+        <h2>I Nostri Prodotti</h2>
+        <div class="product-grid">
+            <!-- Prodotto 1 -->
+            
+            <div class="product-card">
+                <img src="jacket.jpg" alt="Giacca">
+                <h3>Felpa girocollo</h3>
+                <p>Prezzo: &euro;39.99</p>
+                <select id="size-select-3">
+                    <option value="">Seleziona Taglia</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+                <button onclick="addToCart('Felpa girocollo', 39.99, 'jacket.jpg', 3)">Aggiungi al carrello</button>
+            </div>
+            <!-- Prodotto 2 -->
+            <div class="product-card">
+                <img src="jeans.jpg" alt="Jeans">
+                <h3>Jeans Baggy</h3>
+                <p>Prezzo: &euro;29.99</p>
+                <select id="size-select-2">
+                    <option value="">Seleziona Taglia</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+                <button onclick="addToCart('Jeans Baggy', 29.99, 'jeans.jpg', 2)">Aggiungi al carrello</button>
+            </div>
+
+            <!-- Prodotto 3 -->
+            <div class="product-card">
+                <img src="tshirt.jpg" alt="T-shirt">
+                <h3>T-shirt Elegante</h3>
+                <p>Prezzo: &euro;19.99</p>
+                <select id="size-select-1">
+                    <option value="">Seleziona Taglia</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+                <button onclick="addToCart('T-shirt', 19.99, 'tshirt.jpg', 1)">Aggiungi al carrello</button>
+            </div>
+
+
+            <!-- Prodotto 4 -->
+            <div class="product-card">
+                <img src="dress.jpg" alt="Vestito">
+                <h3>Vestito Elegante</h3>
+                <p>Prezzo: &euro;119.99</p>
+                <select id="size-select-4">
+                    <option value="">Seleziona Taglia</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+                <button onclick="addToCart('Vestito Elegante', 119.99, 'dress.jpg', 4)">Aggiungi al carrello</button>
+            </div>
+
+            <!-- Prodotto 5 -->
+            <div class="product-card">
+                <img src="hat.jpg" alt="Cappello">
+                <h3>Cappello Invernale</h3>
+                <p>Prezzo: &euro;14.99</p>
+                <select id="size-select-5">
+                    <option value="">Seleziona Taglia</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+                <button onclick="addToCart('Cappello Invernale', 14.99, 'hat.jpg', 5)">Aggiungi al carrello</button>
+            </div>
+
+            <!-- Prodotto 6 -->
+            <div class="product-card">
+                <img src="chain.jpg" alt="Collana">
+                <h3>Collana</h3>
+                <p>Prezzo: &euro;79.99</p>
+                <select id="size-select-6">
+                    <option value="">Seleziona Taglia</option>
+                    <option value="30cm">30cm</option>
+                    <option value="50cm">50cm</option>
+                    <option value="70cm">70cm</option>
+                </select>
+                <button onclick="addToCart('Collana', 79.99, 'chain.jpg', 6)">Aggiungi al carrello</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Swant-Shop. Tutti i diritti riservati. | <a href="home.html">Torna alla pagina iniziale</a></p>
+    </footer>
+</body>
+</html>
